@@ -1,13 +1,54 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face{
+    font-family:"Confortaa-bold";
+    src: url("./assets/fonts/Comfortaa-Bold.ttf")
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.bg-fullscreen{
+    @apply h-screen bg-nu-vector2
 }
+
+.title-normal{
+    @apply text-2xl font-bold text-center
+}
+
+.form-normal{
+    @apply flex flex-col space-y-10 w-80
+}
+
+.input-normal{
+    @apply h-10 text-lg text-center rounded-full
+}
+
+.buttom-normal{
+    @apply bg-white-gray rounded-full text-black py-2 px-7 font-bold hover:bg-orange text-lg
+}
+
+.center-div{
+    @apply h-5/6 flex flex-col place-content-center items-center font-confortaa   
+}
+
+.center-card{
+    @apply h-5/6 w-5/6 flex flex-col space-y-10 bg-white place-content-center items-center rounded-lg
+}
+
+.list{
+    @apply flex flex-row font-confortaa
+}
+
+.list-item{
+    @apply flex content-center
+}
+
+.nav-list-buttom{
+    @apply text-black py-2 px-7 font-bold hover:text-orange text-lg
+}
+
+#root {
+    height:100vh;
+}
+  
