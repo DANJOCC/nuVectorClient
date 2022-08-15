@@ -1,9 +1,18 @@
 import React, { useRef, useState } from 'react'
+import jwt_decode from "jwt-decode";
 import validator from 'validator'
-import fetchs from '../helpers/fetchs'
+import { useDispatch } from 'react-redux';
+import { entry } from '../features/authSlice';
+import { fetchs, setItem } from '../helpers';
 export default function Login() {
+  
   const [loading, setLoading]=useState(false)
+  
+  const [emailError, setEmailError]=useState(false)
 
+  const [passwordError, setPasswordError]=useState(false)
+
+  const dispatch=useDispatch();
   const [user,setUser]=useState({
     email:'',
     password:''
@@ -13,9 +22,7 @@ export default function Login() {
   const form=useRef(null)
   const password=useRef(null)
 
-  const [emailError, setEmailError]=useState(false)
-  const [passwordError, setPasswordError]=useState(false)
-
+ 
   const validatePassword=()=>{
     return password.current.value==='' ? false : !validator.isStrongPassword(password.current.value,{
                                                                   minLength:8,
@@ -29,7 +36,18 @@ export default function Login() {
     setLoading(true)
     try {
       const res = fetchs.login(data)
-      console.log(res)
+      res.then(data=>{
+       
+      const payload=jwt_decode(data.token)
+      
+      payload.data.token=data.token
+      dispatch(entry(payload.data))
+      setItem('user',JSON.stringify(payload.data))
+
+      //console.log(payload)  
+    })
+      
+      
 
     } catch (error) {
       console.error(error)
