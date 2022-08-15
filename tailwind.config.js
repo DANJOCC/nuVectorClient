@@ -10,7 +10,8 @@ module.exports = {
       'gray':'#E6E6EA',
       'silver':'#78716B',
       'black':'#191308',
-      'white':'rgba(255, 255, 255, 0.5)'
+      'white':'rgba(255, 255, 255, 0.5)',
+      'red':'rgb(255, 28, 0)'
     },
     fontFamily:{
       confortaa:["Confortaa-bold",]

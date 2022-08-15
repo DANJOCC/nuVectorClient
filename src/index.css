@@ -17,11 +17,19 @@
 }
 
 .form-normal{
-    @apply flex flex-col space-y-10 w-80
+    @apply flex flex-col space-y-5 w-80
 }
 
 .input-normal{
     @apply h-10 text-lg text-center rounded-full
+}
+
+.input-bad{
+    @apply h-10 text-lg text-center rounded-full bg-red
+}
+
+.text-error-message{
+    @apply text-xs text-left space-y-0 text-red
 }
 
 .buttom-normal{
