@@ -9,7 +9,7 @@
 }
 
 .bg-fullscreen{
-    @apply h-screen bg-nu-vector2
+    @apply h-full w-full bg-cover bg-auto min-w-full min-h-full
 }
 
 .title-normal{
@@ -21,7 +21,7 @@
 }
 
 .input-normal{
-    @apply h-10 text-lg text-center rounded-full
+    @apply h-[5vh] shadow-lg text-lg text-center rounded-full min-h-[2rem]
 }
 
 .input-bad{
@@ -33,22 +33,38 @@
 }
 
 .buttom-normal{
-    @apply bg-white-gray rounded-full text-black py-2 px-7 font-bold hover:bg-orange text-lg
+    @apply bg-white-gray shadow-lg rounded-full text-black py-2 px-7 font-bold hover:bg-orange text-lg
 }
 
 .center-div{
-    @apply h-5/6 flex flex-col place-content-center items-center font-confortaa   
+    @apply h-[90%] flex flex-col shadow-lg place-content-center items-center font-confortaa overflow-auto  min-h-min
 }
 
 .center-card{
-    @apply h-5/6 w-5/6 flex flex-col space-y-10 bg-white place-content-center items-center rounded-lg
+    @apply h-5/6 w-11/12 shadow-lg flex flex-col space-y-10 bg-white place-content-center items-center rounded-lg  min-h-min
 }
 
-.list{
+.center-content-cards{
+    @apply w-[97%] h-[80%] shadow-lg flex flex-col space-y-10 bg-white place-content-center items-center rounded-lg text-2xl font-bold 2xl:overflow-hidden
+}
+
+.center-content{
+    @apply w-11/12 h-[80%] shadow-lg flex flex-col space-y-10 bg-white place-content-center items-center rounded-lg text-2xl font-bold
+}
+
+.center-list-div{
+    @apply w-full my-1
+}
+
+.nav-header{
+    @apply bg-gray flex flex-row justify-between sticky top-0 z-50 w-full min-w-max
+}
+
+.nav-list{
     @apply flex flex-row font-confortaa
 }
 
-.list-item{
+.nav-list-item{
     @apply flex content-center
 }
 
@@ -56,7 +72,47 @@
     @apply text-black py-2 px-7 font-bold hover:text-orange text-lg
 }
 
+.list{
+    @apply flex flex-row font-confortaa space-x-4 ml-8
+}
+
+.list-item{
+    @apply flex content-center
+}
+
+.list-cards{
+    @apply grid xl:grid-cols-4 xl:grid-rows-3  md:grid-cols-3 md:grid-rows-2 gap-y-5 grid-cols-3 grid-rows-1 2xl:overflow-hidden overflow-auto touch-auto
+}
+
+.card{
+    @apply bg-white rounded-lg lg:mx-8 mx-1 xl:h-36 xl:w-72 lg:h-16 lg:w-56 md:h-20 md:w-36 sm:h-16 sm:w-24 flex flex-col justify-center shadow-lg 
+    transition hover:bg-white-solid  hover:text-orange hover:scale-110
+}
+
+.card-title{
+    @apply xl:text-3xl text-base m-2
+}
+
+.card-intro{
+    @apply lg:text-xs m-2 hidden xl:block
+}
+
+.regular-buttom{
+    @apply flex flex-row gap-x-2 text-black py-2 px-5 bg-white shadow-lg
+    rounded-full font-bold text-sm transition hover:text-white-solid hover:bg-orange hover:border-white-solid hover:border-2 
+}
+
+
+
 #root {
     height:100vh;
 }
+
+html { 
+    background:  url('/src/assets/images/background2.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
   

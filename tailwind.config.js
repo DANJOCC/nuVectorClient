@@ -6,11 +6,13 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       'orange':'#FC862D',
+      'dark-orange':'#e86400',
       'white-gray':'#F4F4F8',
       'gray':'#E6E6EA',
       'silver':'#78716B',
       'black':'#191308',
       'white':'rgba(255, 255, 255, 0.5)',
+      'white-solid':'rgba(255, 255, 255)',
       'red':'rgb(255, 28, 0)'
     },
     fontFamily:{

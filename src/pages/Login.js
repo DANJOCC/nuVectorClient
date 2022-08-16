@@ -4,6 +4,7 @@ import validator from 'validator'
 import { useDispatch } from 'react-redux';
 import { entry } from '../features/authSlice';
 import { fetchs, setItem } from '../helpers';
+import {useNavigate } from 'react-router-dom';
 export default function Login() {
   
   const [loading, setLoading]=useState(false)
@@ -11,6 +12,8 @@ export default function Login() {
   const [emailError, setEmailError]=useState(false)
 
   const [passwordError, setPasswordError]=useState(false)
+
+  const navegate=useNavigate()
 
   const dispatch=useDispatch();
   const [user,setUser]=useState({
@@ -69,11 +72,12 @@ export default function Login() {
         return
     }
     setEmailError(false)
-      console.log(userData.get('email'))
       setUser({email:userData.get('email'), password:userData.get('password')})
       fetching(userData)
-      
+      navegate('/workspace',{replace:true})
+          
   }
+  
 
   
 

@@ -11,31 +11,31 @@ useEffect(()=>{
 })
   return (
     
-    <nav className='bg-gray flex flex-row justify-between'>
+    <nav className='nav-header'>
 
-        <Link className='' to='/'><img width='200px' height='100px' src={logo} alt='logo'></img></Link>
+        <Link className='min-w-max' to='/'><img width='200px' height='100px' src={logo} alt='logo'></img></Link>
        
 
        {!userData.user.logged && 
-       <ul className='list'>
-            <li className='list-item'>
+       <ul className='nav-list'>
+            <li className='nav-list-item'>
                 <button><Link className='nav-list-buttom' to='/login'>Login</Link></button>  
             </li>
-            <li className='list-item'>
+            <li className='nav-list-item'>
                 <button className='nav-list-buttom' ><a href='/sign Up'>Sign in</a></button>
             </li>
         </ul>}
 
         {
           userData.user.logged &&
-          <ul className='list'>
-            <li className='list-item'>
+          <ul className='nav-list'>
+            <li className='nav-list-item'>
                 <button><Link className='nav-list-buttom' to='/'>{userData.user.username}</Link></button>
             </li>
-            <li className='list-item'>
-                <button className='nav-list-buttom' ><a href='/'>Workspace</a></button>
+            <li className='nav-list-item'>
+                <button ><Link className='nav-list-buttom' to='/workspace'>Workspace</Link></button>
             </li>
-            <li className='list-item'>
+            <li className='nav-list-item'>
                 <button><Link className='nav-list-buttom' to='/'>Log Out</Link></button>  
             </li>
         </ul>}
