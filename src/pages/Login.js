@@ -116,7 +116,7 @@ export default function Login() {
              a special character and a minimun length of 8</p>
         }
 
-        <input className='buttom-normal' type="submit" value="Log in"/>
+        <input className='normal-buttom' type="submit" value="Log in"/>
       </form>
       </div>
     </div>

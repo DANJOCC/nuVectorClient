@@ -1,14 +1,19 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {  useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/images/LogoNuVector.png'
-import { getStorageData } from '../features/authSlice';
+import { logged } from '../features/authSlice';
+import { erase } from '../helpers/sessionStorage';
 export default function Navbar() {
-  const userData=useSelector(state=>state.auth);
-  const dispatch=useDispatch()  
-useEffect(()=>{
-  dispatch(getStorageData())
-})
+  const userData=useSelector(state=>state.auth); 
+  const dispatch=useDispatch(); 
+  const navigate=useNavigate()
+  const logOut=()=>{
+    erase()
+    dispatch(logged())
+    navigate('/', {replace:true})
+  }
+
   return (
     
     <nav className='nav-header'>
@@ -36,7 +41,7 @@ useEffect(()=>{
                 <button ><Link className='nav-list-buttom' to='/workspace'>Workspace</Link></button>
             </li>
             <li className='nav-list-item'>
-                <button><Link className='nav-list-buttom' to='/'>Log Out</Link></button>  
+                <button className='nav-list-buttom' onClick={logOut}>Log out</button>  
             </li>
         </ul>}
 

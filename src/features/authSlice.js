@@ -16,7 +16,6 @@ export const authSlice=createSlice({
     initialState,
     reducers:{
         entry:(state, action)=>{
-            console.log(action.payload.logged)
             state.token=action.payload.token
             state.user.username=action.payload.username
             state.user.id=action.payload.id
@@ -25,7 +24,6 @@ export const authSlice=createSlice({
         },
         getStorageData:(state)=>{
             const dataString=getItem('user');
-            console.log(dataString)
             if(dataString !== null){
                 const data=JSON.parse(dataString)
                 state.token=data.token
@@ -34,10 +32,13 @@ export const authSlice=createSlice({
                 state.user.logged=data.logged
                 state.user.role=data.role
             }
+        },
+        logged:(state)=>{
+            state.user.logged=!state.user.logged
         }
     }
 })
 
-export const {entry,getStorageData}=authSlice.actions
+export const {entry,getStorageData,logged}=authSlice.actions
 
 export default authSlice.reducer

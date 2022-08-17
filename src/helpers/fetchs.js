@@ -7,5 +7,16 @@ export const fetchs={
         })
        const data=await res.json();
     return data
-}
+    },
+    newProject: async (body, token)=>{
+        const res = await fetch(URL+'/newProject',{
+             method:'POST',
+             headers:{
+                Authorization: 'Bearer '+token
+             },
+             body
+         })
+        const data=await res.json();
+     return data
+     },
 }

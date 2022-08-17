@@ -12,6 +12,10 @@
     @apply h-full w-full bg-cover bg-auto min-w-full min-h-full
 }
 
+.animation-buttom{
+    @apply transition hover:text-white-solid hover:bg-orange hover:border-white-solid hover:border-2 
+}
+
 .title-normal{
     @apply text-2xl font-bold text-center
 }
@@ -24,6 +28,13 @@
     @apply h-[5vh] shadow-lg text-lg text-center rounded-full min-h-[2rem]
 }
 
+.input-normal-v2{
+    @apply shadow-lg rounded-lg caret-orange p-2 border-2 border-white-solid focus:outline-none focus:border-dark-orange
+}
+.input-normal-v3{
+    @apply shadow-lg rounded-lg caret-orange p-2 border-2 border-white-solid focus:border-dark-orange focus:outline-none
+}
+
 .input-bad{
     @apply h-10 text-lg text-center rounded-full bg-red
 }
@@ -32,8 +43,8 @@
     @apply text-xs text-left space-y-0 text-red
 }
 
-.buttom-normal{
-    @apply bg-white-gray shadow-lg rounded-full text-black py-2 px-7 font-bold hover:bg-orange text-lg
+.normal-buttom{
+    @apply bg-white shadow-lg rounded-full border-2 border-white text-black py-2 px-7 font-bold hover:bg-orange text-lg animation-buttom
 }
 
 .center-div{
@@ -49,7 +60,7 @@
 }
 
 .center-content{
-    @apply w-11/12 h-[80%] shadow-lg flex flex-col space-y-10 bg-white place-content-center items-center rounded-lg text-2xl font-bold
+    @apply w-[97%] h-[80%] shadow-lg flex flex-col space-y-10 bg-white place-content-center items-center rounded-lg text-2xl font-bold
 }
 
 .center-list-div{
@@ -98,7 +109,7 @@
 }
 
 .regular-buttom{
-    @apply flex flex-row gap-x-2 text-black py-2 px-5 bg-white shadow-lg
+    @apply flex flex-row gap-x-2 text-black py-2 px-5 bg-white shadow-lg border-2 border-white
     rounded-full font-bold text-sm transition hover:text-white-solid hover:bg-orange hover:border-white-solid hover:border-2 
 }
 

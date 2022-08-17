@@ -7,7 +7,12 @@ const getItem=(key)=>{
     return data
 }
 
+const erase=()=>{
+    sessionStorage.clear()
+}
+
 module.exports={
     getItem,
-    setItem
+    setItem,
+    erase
 }
