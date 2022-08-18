@@ -19,4 +19,25 @@ export const fetchs={
         const data=await res.json();
      return data
      },
+
+   getProjects:async (id,token)=>{
+      const res = await fetch(URL+'/getProjects/'+id,{
+           method:'GET',
+           headers:{
+              Authorization: 'Bearer '+token
+           },
+       })
+      const data=await res.json();
+   return data
+   },
+   getClients:async (token)=>{
+      const res = await fetch(URL+'/getClientsNames',{
+           method:'GET',
+           headers:{
+              Authorization: 'Bearer '+token
+           },
+       })
+      const data=await res.json();
+   return data
+   },
 }

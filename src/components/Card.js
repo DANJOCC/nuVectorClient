@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function Card() {
+export default function Card({title,intro}) {
   return (
     <li className='card'>
-        <h1 className='card-title'>Titulo</h1>
-        <p className='card-intro'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dictum 
-                sollicitudin lorem at fringilla. Phasellus magna lacus, egestas eu egestas a,
+        <h1 className='card-title'>{title}</h1>
+        <p className='card-intro'>
+          {intro}
         </p>
     </li>
   )

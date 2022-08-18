@@ -1,27 +1,48 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+//import { useNavigate } from 'react-router-dom'
 import { fetchs, getItem } from '../helpers'
 
 export default function CreateProject({token}) {
-
+  //const navigate=useNavigate()
   const [loading, setLoading]=useState(false)
+
+  const [clients,setClients]=useState(null)
 
   const form=useRef(null)
 
+  useEffect(()=>{
+    fetching(null,true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+},[])
 
-  const fetching=(data)=>{
+ 
+
+
+
+  const redirecTo=()=>{
+    //navigate('/workspace',{replace:true})
+  }
+
+  const fetching=(data,flag)=>{
     setLoading(true)
     try {
-      console.log(token)
-      const res = fetchs.newProject(data,token)
-      res.then(data=>{
+
+      if(flag){
+        fetchs.getClients(token)
+          .then(data=>{
+          setClients(data.names)
+        })
+      }
+      else{
+        fetchs.newProject(data,token)
+        .then(data=>{
        
-      const payload=data
+        const payload=data
 
-      console.log(payload)  
-    })
+        console.log(payload)  
+      })
+    }
       
-      
-
     } catch (error) {
       console.error(error)
     }
@@ -35,12 +56,24 @@ export default function CreateProject({token}) {
       const formData=new FormData(form.current);
       const user=JSON.parse(getItem('user'))
       formData.append('id',user.id)
-      fetching(formData)
+      fetching(formData,false)
   }
 
 
   return (
     <div className='center-div'>
+      <div className='center-list-div'>
+               <ul className='list'>
+                  <li className='list-item'>
+                    <button className='regular-buttom' onClick={()=>{redirecTo()}}>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
+                      </svg>
+                      Back workspace
+                    </button>
+                  </li>
+        </ul>
+      </div>
       <div className='center-card'>
         <h6 className='title-normal'>New Project</h6>
         {loading && <h1 className='text-error-message'>Loading...</h1>}
@@ -49,7 +82,11 @@ export default function CreateProject({token}) {
           <input className='input-normal-v2 col-start-1 col-end-5 row-start-2 row-end-2' required type='text' name='name' id='name'/>
 
           <label className='col-start-1 col-end-5 row-start-3 row-end-3'>Client:</label>
-          <input className='input-normal-v2 col-start-1 col-end-5 row-start-4 row-end-4' required type='text' name='client' id='client'/>
+          <select className='input-normal-v2 col-start-1 col-end-5 row-start-4 row-end-4' required name='client_id' id='client'>
+                {clients!==null && clients.map((value=>{
+                  return <option key={value.id} value={value.id}>{value.name}</option>
+                }))}
+          </select>
 
           <label  className='col-start-5 col-end-7 row-start-3 row-end-3'>Start Date:</label>
           <input type='date'className='input-normal-v2 text-center col-start-5 col-end-7 row-start-4 row-end-4' required  name='start' id='start' min='2022-01-01' max='2040-12-31'></input>

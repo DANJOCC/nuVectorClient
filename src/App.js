@@ -15,7 +15,8 @@ function App() {
   const dispatch=useDispatch() 
   useEffect(()=>{
     dispatch(getStorageData())
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <div className="bg-fullscreen">
@@ -24,7 +25,7 @@ function App() {
         <Route path="/" element={<Home/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route element={<ProtectedRoutes isAllowed={user.logged}/>}>
-            <Route path="/workspace" element={<Workspace role={user.role}/>}></Route>
+            <Route path="/workspace" element={<Workspace role={user.role} token={token} id={user.id}/>}></Route>
         </Route>
         <Route  element={<ProtectedRoutes isAllowed={user.logged && user.role==='ADMIN'}/>}>
           <Route path="/NewProject" element={<CreateProject token={token}/>}></Route>
