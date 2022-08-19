@@ -15,6 +15,9 @@ export const authSlice=createSlice({
     name:'authentication',
     initialState,
     reducers:{
+
+        //change state of user after login
+
         entry:(state, action)=>{
             state.token=action.payload.token
             state.user.username=action.payload.username
@@ -22,6 +25,9 @@ export const authSlice=createSlice({
             state.user.logged=action.payload.logged
             state.user.role=action.payload.role
         },
+
+        //prevent to return default state, get user data from session storage
+
         getStorageData:(state)=>{
             const dataString=getItem('user');
             if(dataString !== null){
@@ -33,6 +39,9 @@ export const authSlice=createSlice({
                 state.user.role=data.role
             }
         },
+
+        //change login state
+
         logged:(state)=>{
             state.user.logged=!state.user.logged
         }

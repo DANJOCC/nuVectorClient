@@ -13,6 +13,11 @@ import { getStorageData } from "./features/authSlice";
 function App() {
   const {user,token}=useSelector(state=>state.auth)
   const dispatch=useDispatch() 
+
+  //font
+
+  /*after login recover user data from session storage*/
+
   useEffect(()=>{
     dispatch(getStorageData())
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,10 +31,10 @@ function App() {
         <Route path="/login" element={<Login/>}></Route>
         <Route element={<ProtectedRoutes isAllowed={user.logged}/>}>
             <Route path="/workspace" element={<Workspace role={user.role} token={token} id={user.id}/>}></Route>
+            <Route path="/project/:id" element={<Project/>}></Route>
         </Route>
         <Route  element={<ProtectedRoutes isAllowed={user.logged && user.role==='ADMIN'}/>}>
           <Route path="/NewProject" element={<CreateProject token={token}/>}></Route>
-          <Route path="/viewProject" element={<Project/>}></Route>
         </Route>
       </Routes>
     </div>

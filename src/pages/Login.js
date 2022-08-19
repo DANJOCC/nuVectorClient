@@ -9,9 +9,11 @@ export default function Login() {
   
   const [loading, setLoading]=useState(false)
   
-  const [emailError, setEmailError]=useState(false)
+  const [emailError, setEmailError]=useState(false)//bad email format
 
-  const [passwordError, setPasswordError]=useState(false)
+  const [passwordError, setPasswordError]=useState(false)//bad password format
+
+  const [wrongPassword, setWrongPassword]=useState(false)
 
   const navegate=useNavigate()
 
@@ -25,7 +27,8 @@ export default function Login() {
   const form=useRef(null)
   const password=useRef(null)
 
- 
+  //validatePassword is for validation wiht validator library and throw indicator for that
+
   const validatePassword=()=>{
     return password.current.value==='' ? false : !validator.isStrongPassword(password.current.value,{
                                                                   minLength:8,
@@ -35,32 +38,36 @@ export default function Login() {
                                                                   })
   }
 
-  const fetching=(data)=>{
+  const fetching= async (userData)=>{
     setLoading(true)
+    let flag=false
     try {
-      const res = fetchs.login(data)
-      res.then(data=>{
-       
-      const payload=jwt_decode(data.token)
+      const data = await fetchs.login(userData)
+    
+    if(typeof data.msg!=='undefined'){//if props msg exist something bad happens when try to login
+          setWrongPassword(true)
+          flag=true
+    }
+
+    else{
+       const payload=jwt_decode(data.token)
       
       payload.data.token=data.token
       dispatch(entry(payload.data))
-      setItem('user',JSON.stringify(payload.data))
+      setItem('user',JSON.stringify(payload.data))}
 
-      //console.log(payload)  
-    })
-      
-      
+    
 
     } catch (error) {
       console.error(error)
     }
     finally{
       setLoading(false)
+      if(!flag){navegate('/workspace',{replace:true})}
     }
   }
 
-  const handleSubmit=(e)=>{
+  const handleSubmit=async (e)=>{
       e.preventDefault()
       const userData=new FormData(form.current)
       if(!validator.isEmail(userData.get('email'))){
@@ -74,7 +81,6 @@ export default function Login() {
     setEmailError(false)
       setUser({email:userData.get('email'), password:userData.get('password')})
       fetching(userData)
-      navegate('/workspace',{replace:true})
           
   }
   
@@ -105,15 +111,25 @@ export default function Login() {
         type='password' 
         placeholder='Password' 
         name='password'
-        onChange={e=>{setPasswordError(validatePassword)}}
+        onChange={e=>{setPasswordError(validatePassword)
+                      setWrongPassword(false)
+                      }}
         required
         defaultValue={user.password}
         />
 
         {
-          passwordError && <p className='text-error-message'>invalid password, all password should have a number,
+          passwordError && 
+          <p className='text-error-message'>
+            invalid password, all password should have a number,
              a capital letter, 
              a special character and a minimun length of 8</p>
+        }
+        {
+          wrongPassword && 
+          <p className='text-error-message'>
+            wrong password
+            </p>
         }
 
         <input className='normal-buttom' type="submit" value="Log in"/>

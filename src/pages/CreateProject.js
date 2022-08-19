@@ -1,12 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react'
-//import { useNavigate } from 'react-router-dom'
-import { fetchs, getItem } from '../helpers'
+/*
+page to create projects if you are admin
+*/
 
+import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { fetchs, getItem } from '../helpers'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 export default function CreateProject({token}) {
-  //const navigate=useNavigate()
+
+  const navigate=useNavigate()
+
   const [loading, setLoading]=useState(false)
 
-  const [clients,setClients]=useState(null)
+  const [clients,setClients]=useState(null) //clients active to do projects
 
   const form=useRef(null)
 
@@ -20,27 +27,20 @@ export default function CreateProject({token}) {
 
 
   const redirecTo=()=>{
-    //navigate('/workspace',{replace:true})
+    navigate('/workspace',{replace:true})
   }
 
-  const fetching=(data,flag)=>{
+  const fetching=async(formData,flag)=>{
     setLoading(true)
     try {
 
       if(flag){
-        fetchs.getClients(token)
-          .then(data=>{
-          setClients(data.names)
-        })
+        const data= await fetchs.getClients(token)
+        
+        setClients(data.names)
       }
       else{
-        fetchs.newProject(data,token)
-        .then(data=>{
-       
-        const payload=data
-
-        console.log(payload)  
-      })
+       await  fetchs.newProject(formData,token)
     }
       
     } catch (error) {
@@ -66,10 +66,8 @@ export default function CreateProject({token}) {
                <ul className='list'>
                   <li className='list-item'>
                     <button className='regular-buttom' onClick={()=>{redirecTo()}}>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
-                      </svg>
-                      Back workspace
+                    <FontAwesomeIcon icon={solid('circle-arrow-left')} size='lg'/>
+                      Back
                     </button>
                   </li>
         </ul>
@@ -77,7 +75,7 @@ export default function CreateProject({token}) {
       <div className='center-card'>
         <h6 className='title-normal'>New Project</h6>
         {loading && <h1 className='text-error-message'>Loading...</h1>}
-        <form ref={form} onSubmit={e=>handleSubmit(e)} className='grid grid-cols-8 grid-rows-9 gap-2 w-[90%]'>
+       {!loading && <form ref={form} onSubmit={e=>handleSubmit(e)} className='grid grid-cols-8 grid-rows-9 gap-2 w-[90%]'>
           <label className='col-start-1 col-end-5 row-start-1 row-end-1'>Project's name:</label>
           <input className='input-normal-v2 col-start-1 col-end-5 row-start-2 row-end-2' required type='text' name='name' id='name'/>
 
@@ -98,7 +96,7 @@ export default function CreateProject({token}) {
           <textarea className='input-normal-v3 col-start-1 col-end-9 row-start-6 row-end-8' maxLength={200} name='description' id='description'/>
 
           <input type='submit' className='normal-buttom col-start-4 col-end-6 row-start-9 row-end-9 m-2' value='Create'/>
-        </form>
+        </form>}
       </div>
     </div>
   )

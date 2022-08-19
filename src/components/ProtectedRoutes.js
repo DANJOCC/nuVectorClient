@@ -1,3 +1,5 @@
+/*component to protect routes and role permissions*/
+
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
