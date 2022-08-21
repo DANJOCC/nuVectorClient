@@ -97,4 +97,17 @@ export const fetchs={
       const data=await res.json();
    return data
    },
+
+   updateProject:async (body,token)=>{
+      const res = await fetch(URL+'/updateProject',{
+           method:'PUT',
+           headers:{
+              Authorization: 'Bearer '+token
+           },
+           body
+       })
+      const data=await res.json();
+   return data
+   },
+
 }

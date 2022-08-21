@@ -3,11 +3,13 @@
 import React from 'react'
 import { generatePath,useNavigate } from 'react-router-dom'
 
-export default function Card({title,intro,id}) {
+export default function Card({title,intro,id,role}) {
   const navigate=useNavigate()
   const redirecTo=()=>{
+   if(role === 'ADMIN'){
     const path=generatePath("/project/:id",{id})
     navigate(path,{replace:true})
+  }
   }
 
   return (

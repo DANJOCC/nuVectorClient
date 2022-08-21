@@ -132,7 +132,7 @@ export default function Login() {
             </p>
         }
 
-        <input className='normal-buttom' type="submit" value="Log in"/>
+        <input className='normal-buttom' type="submit" value={loading ? "Waiting...":"Log in"}/>
       </form>
       </div>
     </div>
