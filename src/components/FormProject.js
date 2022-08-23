@@ -119,11 +119,7 @@ const handleEdit=async (e)=>{
              disabled>{active? 'Active':'Inactive'}</button>         
           
           <label className='col-start-1 col-end-5 row-start-3 row-end-3'>Client:</label>
-          <select className='input-normal-v4 col-start-1 col-end-5 row-start-4 row-end-4' value={data.client} required name='client_id' id='client' readOnly>
-                {!loading && clients!==null && typeof clients!=='undefined' && clients.map((value=>{
-                  return <option key={value.id} value={value.id}>{value.name}</option>
-                }))}
-          </select>
+          <input className='input-normal-v4 col-start-1 col-end-5 row-start-4 row-end-4'  type='text' value={data.client} required name='client_id' id='client' readOnly></input>
 
           <label  className='col-start-5 col-end-7 row-start-3 row-end-3'>Start Date:</label>
           <input type='date'className='input-normal-v4 text-center col-start-5 col-end-7 row-start-4 row-end-4' value={data.start} required  name='start' id='start' min='2022-01-01' max='2040-12-31' readOnly></input>

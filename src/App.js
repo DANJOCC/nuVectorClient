@@ -9,6 +9,7 @@ import CreateProject from "./pages/CreateProject";
 import Project from "./pages/Project";
 import { useEffect } from "react";
 import { getStorageData } from "./features/authSlice";
+import ViewTasks from "./pages/ViewTasks";
 
 function App() {
   const {user,token}=useSelector(state=>state.auth)
@@ -32,6 +33,7 @@ function App() {
         <Route element={<ProtectedRoutes isAllowed={user.logged}/>}>
             <Route path="/workspace" element={<Workspace role={user.role} token={token} id={user.id}/>}></Route>
             <Route path="/project/:id" element={<Project/>}></Route>
+            <Route path="/tasks" element={<ViewTasks/>}></Route>
         </Route>
         <Route  element={<ProtectedRoutes isAllowed={user.logged && user.role==='ADMIN'}/>}>
           <Route path="/NewProject" element={<CreateProject token={token}/>}></Route>

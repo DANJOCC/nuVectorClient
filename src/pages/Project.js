@@ -12,9 +12,9 @@ import Tables from '../components/Tables'
 import FormProject from '../components/FormProject'
 
 export default function Project() {
-  const pages=[0,1]
+  const pages=[0,1,2]
 
-  const {token}=useSelector(state=>state.auth)
+  const {user,token}=useSelector(state=>state.auth)
 
   const [editable,setEditable]=useState(false)
 
@@ -72,12 +72,12 @@ export default function Project() {
                       Back
                     </button>
                   </li>
-                  <li className='list-item'>
+                 { user.role ==='ADMIN ' && <li className='list-item'>
                     <button className='regular-buttom' onClick={()=>{edit()}}>
                     <FontAwesomeIcon icon={solid('pen')} size='lg'/>
                       Edit
                     </button>
-                  </li>
+                  </li>}
         </ul>
       </div>
       <div className={page===0 ? 'center-card': 'top-card'}>
@@ -105,10 +105,11 @@ export default function Project() {
         }
         {project!==null && typeof project!=='undefined' && page===1 &&
            <div className='flex flex-row gap-x-2 w-[98%] m-4 overflow-auto'>
-            <Tables title='Products' headers={['N#','Name','Description','State']} rows={products}></Tables>
-            <Tables title='Activities' headers={['N#','Name','Description','State']} rows={activities}></Tables>
+            <Tables title='Products' headers={['N#','Name','Description','State']} rows={products} type='FORM'></Tables>
+            <Tables title='Activities' headers={['N#','Name','Description','State']} rows={activities} type='FORM'></Tables>
          </div>
         }
+        
       </div>
       <div className='flex flex-row gap-x-5 m-2'>
         <button className='normal-buttom' onClick={()=>{setPage((prev)=>{

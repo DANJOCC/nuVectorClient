@@ -27,7 +27,7 @@ export default function Navbar() {
                 <button><Link className='nav-list-buttom' to='/login'>Login</Link></button>  
             </li>
             <li className='nav-list-item'>
-                <button className='nav-list-buttom' ><a href='/sign Up'>Sign in</a></button>
+                <button className='nav-list-buttom' ><a href='/sign Up'>Sign up</a></button>
             </li>
         </ul>}
 

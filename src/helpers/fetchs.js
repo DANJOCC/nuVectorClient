@@ -110,4 +110,15 @@ export const fetchs={
    return data
    },
 
+   getTasksFilters:async (name,filter,token)=>{
+      const res = await fetch(URL+'/tasks/'+name+"/"+filter,{
+           method:'GET',
+           headers:{
+              Authorization: 'Bearer '+token
+           },
+       })
+      const data=await res.json();
+   return data
+   },
+
 }
