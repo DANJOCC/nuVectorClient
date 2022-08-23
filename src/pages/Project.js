@@ -72,7 +72,7 @@ export default function Project() {
                       Back
                     </button>
                   </li>
-                 { user.role ==='ADMIN ' && <li className='list-item'>
+                 { user.role ==='ADMIN' && <li className='list-item'>
                     <button className='regular-buttom' onClick={()=>{edit()}}>
                     <FontAwesomeIcon icon={solid('pen')} size='lg'/>
                       Edit
